@@ -54,6 +54,7 @@ resource "azurerm_application_gateway" "appgw" {
     content {
       name         = backend_address_pool.value.name
       ip_addresses = lookup(backend_address_pool.value, "ip_addresses", "") == "" ? null : split(",", backend_address_pool.value.ip_addresses)
+      fqdns        = lookup(backend_address_pool.value, "fqdns", "") == "" ? null : split(",", backend_address_pool.value.fqdns)
     }
   }
 

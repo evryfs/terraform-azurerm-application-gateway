@@ -55,6 +55,7 @@ The `backend_address_pools` supports the following:
 | ------------- | ------------------------------------------------------------------------ | :------: | :-----: | :------: |
 | name          | The name of the Backend Address Pool.                                    | `string` |   n/a   |   yes    |
 | ip\_addresses | A list of IP Addresses which should be part of the Backend Address Pool. | `string` | `null`  |    no    |
+| fqdns         | A list of FQDNs which should be part of the Backend Address Pool.        | `string` | `null`  |    no    |
 
 ##
 The `ssl_certificates` supports the following:
