@@ -77,6 +77,11 @@ resource "azurerm_application_gateway" "appgw" {
     port = 443
   }
 
+  frontend_port {
+    name = "9443"
+    port = 9443
+  }
+
   dynamic "identity" {
     for_each = var.identity_id != null ? [""] : []
     content {
