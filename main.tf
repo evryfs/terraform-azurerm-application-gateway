@@ -5,6 +5,8 @@ resource "azurerm_application_gateway" "appgw" {
 
   enable_http2 = var.enable_http2
 
+  firewall_policy_id = var.firewall_policy_id
+
   sku {
     name     = var.sku.size
     tier     = var.sku.tier

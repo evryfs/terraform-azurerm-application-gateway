@@ -98,3 +98,8 @@ variable "enable_http2" {
   description = "Enable HTTP2"
   default     = false
 }
+variable "firewall_policy_id" {
+  description = "Firewall policy id"
+  type        = string
+  default     = null
+}
