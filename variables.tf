@@ -44,7 +44,7 @@ variable "frontend_ip_configuration" {
 variable "backend_address_pools" {
   type        = list(map(string))
   description = "List of objects that represent the configuration of each backend address pool."
-  # backend_address_pools = [{ name = "", ip_addresses = "" }]
+  # backend_address_pools = [{ name = "", ip_addresses = "", fqdns = "" }]
 }
 variable "identity_id" {
   type        = string
@@ -71,7 +71,7 @@ variable "probes" {
 variable "backend_http_settings" {
   type        = list(map(string))
   description = "List of objects that represent the configuration of each backend http settings."
-  # backend_http_settings = [{ name = "", port = "", protocol = "", request_timeout = "", host_name = "", probe_name = "" }]
+  # backend_http_settings = [{ name = "", port = "", protocol = "", request_timeout = "", host_name = "", probe_name = "", pick_host_name_from_backend_address = false }]
 }
 variable "request_routing_rules" {
   type        = list(map(string))

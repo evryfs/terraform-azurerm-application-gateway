@@ -66,6 +66,7 @@ resource "azurerm_application_gateway" "appgw" {
     content {
       name         = backend_address_pool.value.name
       ip_addresses = lookup(backend_address_pool.value, "ip_addresses", "") == "" ? null : split(",", backend_address_pool.value.ip_addresses)
+      fqdns        = lookup(backend_address_pool.value, "fqdns", "") == "" ? null : split(",", backend_address_pool.value.fqdns)
     }
   }
 
@@ -144,13 +145,14 @@ resource "azurerm_application_gateway" "appgw" {
   dynamic "backend_http_settings" {
     for_each = var.backend_http_settings
     content {
-      cookie_based_affinity = "Disabled"
-      name                  = backend_http_settings.value.name
-      port                  = backend_http_settings.value.port
-      protocol              = backend_http_settings.value.protocol
-      request_timeout       = backend_http_settings.value.request_timeout
-      host_name             = lookup(backend_http_settings.value, "host_name", null)
-      probe_name            = lookup(backend_http_settings.value, "probe_name", null)
+      cookie_based_affinity               = "Disabled"
+      name                                = backend_http_settings.value.name
+      port                                = backend_http_settings.value.port
+      protocol                            = backend_http_settings.value.protocol
+      request_timeout                     = backend_http_settings.value.request_timeout
+      host_name                           = lookup(backend_http_settings.value, "host_name", null)
+      probe_name                          = lookup(backend_http_settings.value, "probe_name", null)
+      pick_host_name_from_backend_address = lookup(backend_http_settings.value, "pick_host_name_from_backend_address", false)
     }
   }
 
