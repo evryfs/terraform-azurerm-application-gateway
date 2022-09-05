@@ -126,6 +126,7 @@ resource "azurerm_application_gateway" "appgw" {
       ssl_certificate_name           = lookup(http_listener.value, "ssl_certificate_name", null)
       require_sni                    = lookup(http_listener.value, "require_sni", null)
       ssl_profile_name               = lookup(http_listener.value, "ssl_profile_name", null)
+      firewall_policy_id             = lookup(http_listener.value, "firewall_policy_id", null)
     }
   }
 
