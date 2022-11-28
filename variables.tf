@@ -78,6 +78,31 @@ variable "request_routing_rules" {
   description = "List of objects that represent the configuration of each backend request routing rule."
   # request_routing_rules = [{ name = "", http_listener_name = "", backend_address_pool_name = "", backend_http_settings_name = "", priority = 10 }]
 }
+variable "rewrite_rule_set" {
+  type = set(
+    object({
+      name = string,
+      rewrite_rules = set(
+        object({
+          name          = string,
+          rule_sequence = number
+          condition = object({
+            ignore_case = optional(bool, true),
+            negate      = optional(bool, false),
+            pattern     = string,
+            variable    = string
+          })
+          response_header_configuration = object({
+            header_name  = string,
+            header_value = string
+          })
+        })
+      )
+    })
+  )
+  default     = []
+  description = "Rewrite-rules"
+}
 variable "tags" {
   type        = map(string)
   default     = {}

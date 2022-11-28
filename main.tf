@@ -169,5 +169,33 @@ resource "azurerm_application_gateway" "appgw" {
     }
   }
 
+  dynamic "rewrite_rule_set" {
+    for_each = var.rewrite_rule_set
+
+    content {
+      name = rewrite_rule_set.value.name
+
+      dynamic "rewrite_rule" {
+        for_each = rewrite_rule_set.value.rewrite_rules
+        content {
+          name          = rewrite_rule.value.name
+          rule_sequence = rewrite_rule.value.rule_sequence
+
+          condition {
+            ignore_case = rewrite_rule.value.condition.ignore_case
+            negate      = rewrite_rule.value.condition.negate
+            pattern     = rewrite_rule.value.condition.pattern
+            variable    = rewrite_rule.value.condition.variable
+          }
+
+          response_header_configuration {
+            header_name  = rewrite_rule.value.response_header_configuration.header_name
+            header_value = rewrite_rule.value.response_header_configuration.header_value
+          }
+        }
+      }
+    }
+  }
+
   tags = var.tags
 }
