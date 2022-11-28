@@ -166,6 +166,7 @@ resource "azurerm_application_gateway" "appgw" {
       backend_address_pool_name  = request_routing_rule.value.backend_address_pool_name
       backend_http_settings_name = request_routing_rule.value.backend_http_settings_name
       priority                   = request_routing_rule.value.priority
+      rewrite_rule_set_name      = request_routing_rule.value.rewrite_rule_set_name
     }
   }
 
